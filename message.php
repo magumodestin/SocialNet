@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destine Chat</title>
+    <link rel="stylesheet" href="message.css">
+</head>
+<body>
+    <!-- Login Modal (shown by default) -->
+    <div class="login-modal" id="loginModal" style="display: flex;">
+        <div class="login-content">
+            <div class="login-header">
+                <h2>Select User Account</h2>
+            </div>
+            <div class="login-body">
+                <div class="user-option" data-user="Destine">
+                    <div class="user-option-avatar">
+                        <img src="profile-pic.jpg" alt="Destine">
+                    </div>
+                    <div class="user-option-info">
+                        <h4>Destine</h4>
+                        <p>Online</p>
+                    </div>
+                </div>
+                <div class="user-option" data-user="Browniiey baddie">
+                    <div class="user-option-avatar">
+                        <img src="member-2.jpeg" alt="Browniiey baddie">
+                    </div>
+                    <div class="user-option-info">
+                        <h4>Browniiey baddie</h4>
+                        <p>Online</p>
+                    </div>
+                </div>
+                <div class="user-option" data-user="Trust">
+                    <div class="user-option-avatar">
+                        <img src="member-3.jpg" alt="Trust">
+                    </div>
+                    <div class="user-option-info">
+                        <h4>Trust</h4>
+                        <p>Away</p>
+                    </div>
+                </div>
+                <div class="user-option" data-user="Dalvin">
+                    <div class="user-option-avatar">
+                        <img src="member-1.jpg" alt="Dalvin">
+                    </div>
+                    <div class="user-option-info">
+                        <h4>Dalvin</h4>
+                        <p>Online</p>
+                    </div>
+                </div>
+                <div class="user-option" data-user="venessa">
+                    <div class="user-option-avatar">
+                        <img src="member-6.jpg" alt="venessa">
+                    </div>
+                    <div class="user-option-info">
+                        <h4>venessa</h4>
+                        <p>Offline</p>
+                    </div>
+                </div>
+                <div class="user-option" data-user="Mrr Hectic">
+                    <div class="user-option-avatar">
+                        <img src="redmoon.jpg" alt="Mrr Hectic">
+                    </div>
+                    <div class="user-option-info">
+                        <h4>Mrr Hectic</h4>
+                        <p>Online</p>
+                    </div>
+                </div>
+            </div>
+            <div class="login-footer">
+                <button class="login-button" onclick="loginUser()">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Chat Container (hidden until login) -->
+    <div class="container" id="chatContainer" style="display: none;">
+        <div class="contacts-panel">
+            <h2>Chat Contacts</h2>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img id="currentUserAvatar" src="" alt="Current User">
+                </div>
+                <div class="user-details">
+                    <div class="user-name" id="currentUserName"></div>
+                    <div class="user-status" id="currentUserStatus">Online</div>
+                </div>
+                <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
+            <div class="contact active" data-user="Browniiey baddie">
+                <div class="contact-avatar" onclick="showFullImage('member-2.jpg', 'Browniiey baddie')">
+                    <img src="member-2.jpg" alt="Browniiey baddie">
+                </div>
+                <div class="contact-info">
+                    <div class="contact-name">Browniiey baddie</div>
+                    <div class="contact-status"><span class="status-indicator status-online"></span>Online</div>
+                </div>
+            </div>
+            <div class="contact" data-user="Trust">
+                <div class="contact-avatar" onclick="showFullImage('member-3.jpg', 'Trust')">
+                    <img src="member-3.jpg" alt="Trust">
+                </div>
+                <div class="contact-info">
+                    <div class="contact-name">Trust</div>
+                    <div class="contact-status"><span class="status-indicator status-away"></span>Away</div>
+                </div>
+            </div>
+            <div class="contact" data-user="Dalvin">
+                <div class="contact-avatar" onclick="showFullImage('member-1.jpg', 'Dalvin')">
+                    <img src="member-1.jpg" alt="Dalvin">
+                </div>
+                <div class="contact-info">
+                    <div class="contact-name">Dalvin</div>
+                    <div class="contact-status"><span class="status-indicator status-online"></span>Online</div>
+                </div>
+            </div>
+            <div class="contact" data-user="venessa">
+                <div class="contact-avatar" onclick="showFullImage('member-6.jpg', 'venessa')">
+                    <img src="member-6.jpg" alt="venessa">
+                </div>
+                <div class="contact-info">
+                    <div class="contact-name">venessa</div>
+                    <div class="contact-status"><span class="status-indicator status-offline"></span>Offline</div>
+                </div>
+            </div>
+            <div class="contact" data-user="Mrr Hectic">
+                <div class="contact-avatar" onclick="showFullImage('redmoon.jpg', 'Mrr Hectic')">
+                    <img src="redmoon.jpg" alt="Mrr Hectic">
+                </div>
+                <div class="contact-info">
+                    <div class="contact-name">Mrr Hectic</div>
+                    <div class="contact-status"><span class="status-indicator status-online"></span>Online</div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-panel">
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="current-contact-avatar" onclick="showFullImage('member-2.jpg', 'Browniiey baddie')">
+                        <img src="member-2.jpg" alt="Browniiey baddie">
+                    </div>
+                    <div class="chat-header-info">
+                        <h3>Browniiey baddie</h3>
+                        <p><span class="status-indicator status-online"></span>Online - Last seen just now</p>
+                    </div>
+                </div>
+                <button class="clear-chat-button" id="clearChatButton">Clear Chat</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- No default messages - chat starts empty -->
+            </div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" placeholder="Type a message...">
+                <button class="send-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Profile Picture</h3>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Profile Picture">
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button download-button" onclick="downloadImage()">Download</button>
+                <button class="modal-button close-button" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+<script src="message.js"></script>
+</body>
+</html>

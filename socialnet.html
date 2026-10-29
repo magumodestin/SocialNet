@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SocialNet</title>
+  
+  <!-- Font Awesome Kit -->
+  <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+  
+  <style>
+    .story-gallery {
+      display: flex;
+      justify-content: flex-start; /* aligns all stories to the left */
+      gap: 15px; /* spacing between boxes */
+      margin-bottom: 20px;
+      flex-wrap: nowrap; /* prevent wrapping */
+      overflow-x: auto;  /* allow horizontal scroll if too many stories */
+      padding-bottom: 10px; /* avoid cutoff in scroll */
+    }
+
+    .story {
+      flex: 0 0 15%; /* fixed width 15% */
+      padding-top: 32%; /* aspect ratio */
+      position: relative;
+      background-position: center;
+      background-size: cover;
+      border-radius: 10px;
+      cursor: pointer; /* pointer on hover */
+      transition: transform 0.3s ease;
+    }
+
+    .story:hover {
+      transform: scale(1.05);
+      z-index: 2; /* bring hovered story forward */
+    }
+
+    .story img {
+      position: absolute;
+      width: 45px;
+      border-radius: 50%;
+      top: 10px;
+      left: 10px;
+      border: 5px solid #1876f2;
+      object-fit: cover;
+    }
+
+    .story p {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+      padding: 0 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .story1 {
+      background-image: linear-gradient(transparent, rgba(0,0,0,0.5)), url(profile-pic.jpg);
+    }
+
+    .story2 {
+      background-image: linear-gradient(transparent, rgba(0,0,0,0.5)), url(status-3.jpg);
+    }
+
+    .story3 {
+      background-image: linear-gradient(transparent, rgba(0,0,0,0.5)), url(status-2.jpg);
+    }
+
+    .story4 {
+      background-image: linear-gradient(transparent, rgba(0,0,0,0.5)), url(ronaldo.png);
+    }
+
+    .story5 {
+      background-image: linear-gradient(transparent, rgba(0,0,0,0.5)), url(member-5.jpg);
+    }
+
+    .story6 {
+      background-image: linear-gradient(transparent, rgba(0,0,0,0.5)), url(member-4.jpg);
+    }
+
+    /* Special styling for the first story */
+    .story.story1 img {
+      top: unset;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      border: 0;
+      width: 30px;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="story-gallery">
+    <div class="story story1">
+      <img src="upload.jpg" alt="Upload Icon" />
+      <p>post Story</p>
+    </div>
+    <div class="story story2">
+      <img src="member-2.jpg" alt="Browniiey baddie" />
+      <p>Browniiey baddie</p>
+    </div>
+    <div class="story story3">
+      <img src="member-6.jpg" alt="venessa" />
+      <p>venessa</p>
+    </div>
+    <div class="story story4">
+      <img src="member-3.jpg" alt="Trust" />
+      <p>Trust</p>
+    </div>
+    <div class="story story5">
+      <img src="member-1.jpg" alt="Destiny" />
+      <p>Destiny</p>
+    </div>
+    <div class="story story6">
+      <img src="redmoon.jpg" alt="Mrr Hectic" />
+      <p>Mrr Hectic</p>
+    </div>
+  </div>
+
+</body>
+</html>

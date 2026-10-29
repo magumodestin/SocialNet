@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocialNet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-color: #f0f2f5;
+      --text-color: #5f5f5f;
+      --primary-color: #1876f2;
+      --card-color: #ffffff;
+    }
+
+    .dark-theme {
+      --bg-color: #18191a;
+      --text-color: #e4e6ea;
+      --primary-color: #2d88ff;
+      --card-color: #242526;
+    }
+
+    body {
+      background: var(--bg-color);
+      transition: background 0.3s;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-color);
+      padding: 5px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-left h2 {
+      font-family: 'Segoe Script', cursive;
+      font-size: 30px;
+      color: green;
+      margin-right: 20px;
+    }
+
+    .nav-left ul {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-left ul li {
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    .nav-left ul li img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box {
+      background: #f0f2f5;
+      border-radius: 20px;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      margin-right: 15px;
+    }
+
+    .search-box img {
+      width: 18px;
+      margin-right: 10px;
+    }
+
+    .search-box input {
+      width: 300px;
+      background: transparent;
+      padding: 10px;
+      outline: none;
+      border: 0;
+    }
+
+    .nav-user-icon {
+      margin-left: 30px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-user-icon img {
+      width: 40px;
+      border-radius: 50%;
+    }
+
+    .online {
+      position: relative;
+    }
+
+    .online::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: #41db51;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .settings-menu {
+      position: absolute;
+      width: 90%;
+      max-width: 350px;
+      background: var(--card-color);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      top: 110%;
+      right: 5%;
+      max-height: 0;
+      transition: max-height 0.3s;
+    }
+
+    .settings-menu-height {
+      max-height: 450px;
+    }
+
+    .settings-menu-expanded {
+      max-height: 650px;
+    }
+
+    .settings-menu-inner {
+      padding: 20px;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-profile img {
+      width: 45px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .user-profile p {
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    .user-profile a {
+      font-size: 12px;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .settings-links {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+    }
+
+    .settings-links .settings-icon {
+      width: 38px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .settings-links a {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    .see-more-section {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .see-more-section.expanded {
+      max-height: 300px;
+    }
+
+    .see-more-toggle {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      cursor: pointer;
+      color: var(--primary-color);
+    }
+
+    .see-more-toggle img {
+      width: 38px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .see-more-toggle span {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .see-more-toggle .arrow {
+      transition: transform 0.3s;
+    }
+
+    .see-more-toggle.expanded .arrow {
+      transform: rotate(180deg);
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #dadde1;
+      margin: 15px 0;
+    }
+
+    #dark-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ccc;
+      width: 45px;
+      border-radius: 15px;
+      padding: 2px 3px;
+      cursor: pointer;
+      display: flex;
+      transition: padding-left 0.5s, background 0.5s;
+    }
+
+    #dark-btn span {
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    #dark-btn.dark-btn-on {
+      padding-left: 23px;
+      background: var(--primary-color);
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      padding: 13px 5%;
+    }
+
+    .left-sidebar {
+      flex-basis: 25%;
+      position: sticky;
+      top: 70px;
+      align-self: flex-start;
+      background: var(--card-color);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .main-content {
+      flex-basis: 47%;
+    }
+
+    .right-sidebar {
+      flex-basis: 25%;
+      position: sticky;
+      top: 70px;
+      align-self: flex-start;
+      background: var(--card-color);
+      padding: 20px;
+      border-radius: 10px;
+      color: var(--text-color);
+    }
+
+    /* Story Gallery Styles */
+    .story-gallery {
+      display: flex;
+      gap: 10px;
+      padding: 15px;
+      background: var(--card-color);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+
+    .story {
+      position: relative;
+      min-width: 120px;
+      height: 200px;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    }
+
+    .story img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .story:hover img {
+      transform: scale(1.05);
+    }
+
+    .story p {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      color: white;
+      font-weight: 500;
+      font-size: 12px;
+      z-index: 2;
+    }
+
+    .story-create {
+      background: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed #ccc;
+    }
+
+    .story-create img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .story-create-btn {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    /* Story Modals */
+    .story-modal, .story-viewer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .story-modal-content, .story-viewer-content {
+      background: var(--card-color);
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .story-modal-header, .story-viewer-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .story-modal-body {
+      padding: 20px;
+    }
+
+    .story-upload-area {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .story-upload-area:hover {
+      border-color: var(--primary-color);
+    }
+
+    .story-upload-area i {
+      font-size: 48px;
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+
+    .story-preview {
+      text-align: center;
+    }
+
+    .story-preview img, .story-preview video {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .story-modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .story-viewer-body {
+      position: relative;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .story-viewer-body img, .story-viewer-body video {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .story-progress {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+    }
+
+    .progress-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar::after {
+      content: '';
+      display: block;
+      height: 100%;
+      background: white;
+      animation: progress 10s linear;
+    }
+
+    @keyframes progress {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    .story-user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .story-user-info img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .story-viewer-footer {
+      padding: 15px 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .story-viewer-footer input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #eee;
+      border-radius: 20px;
+      outline: none;
+    }
+
+    /* Search Results Styling */
+    .search-results {
+      background: var(--card-color);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    .search-results.active {
+      display: block;
+    }
+
+    .search-results h3 {
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .result-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+
+    .result-item:hover {
+      background: #f5f5f5;
+    }
+
+    .result-item img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .result-item .info {
+      flex: 1;
+    }
+
+    .result-item .info h4 {
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+
+    .result-item .info p {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .result-item .status {
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 15px;
+      background: #e4e6eb;
+      color: #65676b;
+    }
+
+    .result-item .status.friends {
+      background: #e7f3ff;
+      color: #1876f2;
+    }
+
+    .result-item .status.following {
+      background: #e7f3ff;
+      color: #1876f2;
+    }
+
+    .profile-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-modal-content {
+      background: var(--card-color);
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-header {
+      position: relative;
+      height: 150px;
+      background: linear-gradient(to right, #3498db, #8e44ad);
+    }
+
+    .profile-pic {
+      position: absolute;
+      bottom: -50px;
+      left: 20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 5px solid var(--card-color);
+    }
+
+    .profile-info {
+      padding: 60px 20px 20px;
+    }
+
+    .profile-info h2 {
+      margin-bottom: 10px;
+      color: var(--text-color);
+    }
+
+    .profile-info p {
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .profile-info .relationship {
+      display: inline-block;
+      padding: 5px 15px;
+      background: #e7f3ff;
+      color: #1876f2;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 8px 15px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e4e6eb;
+      color: #050505;
+    }
+
+    .close-modal, .close-viewer {
+      font-size: 24px;
+      color: var(--text-color);
+      cursor: pointer;
+    }
+
+    .close-viewer {
+      color: white;
+    }
+
+    /* Welcome message styling */
+    .welcome-message {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-color);
+    }
+
+    .welcome-message h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    .welcome-message p {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <h2>SocialNet</h2>
+      <ul>
+        <li><i class="fas fa-bell"></i></li>
+        <li><i class="fas fa-comment"></i></li>
+        <li><i class="fas fa-play-circle"></i></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search" id="search-input">
+      </div>
+    </div>
+    <div class="nav-user-icon online" onclick="settingsMenuToggle()">
+      <img src="https://i.pravatar.cc/40?img=1" alt="Profile">
+    </div>
+    
+    <!-- Settings Menu -->
+    <div class="settings-menu">
+      <div id="dark-btn">
+        <span></span>
+      </div>
+      <div class="settings-menu-inner">
+        <div class="user-profile">
+          <img src="https://i.pravatar.cc/40?img=1" alt="Profile">
+          <div>
+            <p>Dêstîñëë Dèstîñëë</p>
+            <a href="#">See Your profile</a>
+          </div>
+        </div>
+        <hr>
+        <div class="user-profile" style="font-size:12px; color:#1876f2; text-decoration: none;">
+          <i class="fas fa-comment-alt settings-icon"></i>
+          <div>
+            <p>Give Feedback</p>
+            <a href="#">Help us to improve new Design of our social media</a>
+          </div>
+        </div>
+        <hr>
+        <div class="settings-links">
+          <i class="fas fa-cog settings-icon"></i>
+          <a href="#">Settings & Privacy <i class="fas fa-chevron-right arrow"></i></a>
+        </div>
+        <div class="settings-links">
+          <i class="fas fa-question-circle settings-icon"></i>
+          <a href="#">Help & Support <i class="fas fa-chevron-right arrow"></i></a>
+        </div>
+        <div class="settings-links">
+          <i class="fas fa-desktop settings-icon"></i>
+          <a href="#">Display & Accessibility <i class="fas fa-chevron-right arrow"></i></a>
+        </div>
+        
+        <!-- See More Section -->
+        <div class="see-more-toggle" id="see-more-toggle">
+          <i class="fas fa-ellipsis-h settings-icon"></i>
+          <span>See More <i class="fas fa-chevron-down arrow"></i></span>
+        </div>
+        
+        <div class="see-more-section" id="see-more-section">
+          <div class="settings-links">
+            <i class="fas fa-birthday-cake settings-icon"></i>
+            <a href="#">Birthdays</a>
+          </div>
+          <div class="settings-links">
+            <i class="fas fa-bookmark settings-icon"></i>
+            <a href="#">Saved</a>
+          </div>
+          <div class="settings-links">
+            <i class="fas fa-history settings-icon"></i>
+            <a href="#">Memories</a>
+          </div>
+          <div class="settings-links">
+            <i class="fas fa-flag settings-icon"></i>
+            <a href="#">Pages</a>
+          </div>
+        </div>
+        
+        <div class="settings-links">
+          <i class="fas fa-sign-out-alt settings-icon"></i>
+          <a href="#">Logout <i class="fas fa-chevron-right arrow"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="left-sidebar">
+      <h3>Quick Links</h3>
+      <ul style="list-style: none; margin-top: 15px;">
+        <li style="padding: 10px 0; cursor: pointer;"><i class="fas fa-user-friends"></i> Friends</li>
+        <li style="padding: 10px 0; cursor: pointer;"><i class="fas fa-users"></i> Groups</li>
+        <li style="padding: 10px 0; cursor: pointer;"><i class="fas fa-store"></i> Marketplace</li>
+        <li style="padding: 10px 0; cursor: pointer;"><i class="fas fa-tv"></i> Watch</li>
+      </ul>
+    </div>
+    
+    <div class="main-content">
+      <!-- Story Gallery -->
+      <div class="story-gallery" id="story-gallery">
+        <div class="story story-create" id="create-story">
+          <img src="https://i.pravatar.cc/60?img=1" alt="Your Story">
+          <div class="story-create-btn">
+            <i class="fas fa-plus"></i>
+          </div>
+          <p>Post Story</p>
+        </div>
+        
+        <!-- Stories will be dynamically added here -->
+      </div>
+      
+      <!-- Welcome message (shown by default) -->
+      <div class="welcome-message" id="welcome-message">
+        <h2>Welcome to SocialNet</h2>
+        <p>Start typing in the search bar to find friends, artists, and pages</p>
+      </div>
+      
+      <!-- Search results (hidden by default) -->
+      <div class="search-results" id="search-results">
+        <h3>Search Results</h3>
+        <div id="results-container">
+          <!-- Results will be dynamically added here -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="right-sidebar">
+      <h3>Contacts</h3>
+      <div style="margin-top: 15px;">
+        <div style="display: flex; align-items: center; padding: 8px 0; cursor: pointer;">
+          <img src="https://i.pravatar.cc/30?img=5" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
+          <span>Browny</span>
+        </div>
+        <div style="display: flex; align-items: center; padding: 8px 0; cursor: pointer;">
+          <img src="https://i.pravatar.cc/30?img=6" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
+          <span>Vanessa</span>
+        </div>
+        <div style="display: flex; align-items: center; padding: 8px 0; cursor: pointer;">
+          <img src="https://i.pravatar.cc/30?img=7" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
+          <span>Mr Hectic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Story Modal -->
+  <div class="story-modal" id="create-story-modal">
+    <div class="story-modal-content">
+      <div class="story-modal-header">
+        <h3>Create Story</h3>
+        <span class="close-modal" onclick="closeCreateStoryModal()">&times;</span>
+      </div>
+      <div class="story-modal-body">
+        <div class="story-upload-area" id="story-upload-area">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Click to Upload Photo or Video</p>
+          <span>Supports: JPG, PNG, MP4</span>
+          <input type="file" id="story-file-input" accept="image/*,video/*" hidden>
+        </div>
+        <div class="story-preview" id="story-preview" style="display: none;">
+          <img id="preview-image" src="" alt="Preview">
+          <video id="preview-video" controls style="display: none;"></video>
+          <button class="btn btn-secondary" onclick="clearPreview()">Remove</button>
+        </div>
+      </div>
+      <div class="story-modal-footer">
+        <button class="btn btn-secondary" onclick="closeCreateStoryModal()">Cancel</button>
+        <button class="btn btn-primary" id="post-story-btn" onclick="postStory()" disabled>Post Story</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Story Modal -->
+  <div class="story-viewer" id="story-viewer">
+    <div class="story-viewer-content">
+      <div class="story-viewer-header">
+        <div class="story-user-info">
+          <img id="viewer-profile-pic" src="" alt="Profile">
+          <div>
+            <h4 id="viewer-username"></h4>
+            <span id="viewer-time"></span>
+          </div>
+        </div>
+        <span class="close-viewer" onclick="closeStoryViewer()">&times;</span>
+      </div>
+      <div class="story-viewer-body">
+        <img id="viewer-image" src="" alt="Story" style="display: none;">
+        <video id="viewer-video" controls style="display: none;"></video>
+        <div class="story-progress">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+      <div class="story-viewer-footer">
+        <input type="text" placeholder="Send message" id="story-reply-input">
+        <button class="btn btn-primary" onclick="sendStoryReply()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div class="profile-modal" id="profile-modal">
+    <div class="profile-modal-content">
+      <div class="profile-header">
+        <span class="close-modal" onclick="closeProfileModal()">&times;</span>
+      </div>
+      <img src="" alt="Profile Picture" class="profile-pic" id="modal-profile-pic">
+      <div class="profile-info">
+        <h2 id="modal-name"></h2>
+        <p id="modal-description"></p>
+        <div class="relationship" id="modal-relationship"></div>
+        <div class="profile-actions">
+          <button class="btn btn-primary" id="modal-action-btn" onclick="toggleFollow()">Follow</button>
+          <button class="btn btn-secondary" onclick="closeProfileModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sample data for users, artists, and pages
+    const friends = [
+      { id: 1, name: "Browny", university: "University of Technology", isFriend: true, profilePic: "https://i.pravatar.cc/100?img=5", type: "friend" },
+      { id: 2, name: "Dalvin", university: "Harvard University", isFriend: true, profilePic: "https://i.pravatar.cc/100?img=6", type: "friend" },
+      { id: 3, name: "Thandolwethu", university: "Oxford University", isFriend: true, profilePic: "https://i.pravatar.cc/100?img=7", type: "friend" },
+      { id: 4, name: "Mrr Hectic", university: "MIT", isFriend: true, profilePic: "https://i.pravatar.cc/100?img=8", type: "friend" },
+      { id: 5, name: "Vanessa", university: "Stanford University", isFriend: true, profilePic: "https://i.pravatar.cc/100?img=9", type: "friend" },
+      { id: 6, name: "Destiny", university: "Cambridge University", isFriend: true, profilePic: "https://i.pravatar.cc/100?img=10", type: "friend" }
+    ];
+
+    const artists = [
+      { id: 7, name: "Quavo", description: "American rapper, singer, and songwriter", isFollowing: false, profilePic: "https://i.pravatar.cc/100?img=11", type: "artist" },
+      { id: 8, name: "Cheef Ben", description: "Music producer and DJ", isFollowing: false, profilePic: "https://i.pravatar.cc/100?img=12", type: "artist" },
+      { id: 9, name: "DJ Khaled", description: "American record producer, radio personality, and DJ", isFollowing: false, profilePic: "https://i.pravatar.cc/100?img=13", type: "artist" },
+      { id: 10, name: "Mr Bean", description: "British comedian and actor", isFollowing: false, profilePic: "https://i.pravatar.cc/100?img=14", type: "artist" }
+    ];
+
+    const pages = [
+      { id: 11, name: "Tech News", description: "Latest technology news and updates", isFollowing: false, profilePic: "https://i.pravatar.cc/100?img=15", type: "page" },
+      { id: 12, name: "Music Lovers", description: "Community for music enthusiasts", isFollowing: false, profilePic: "https://i.pravatar.cc/100?img=16", type: "page" },
+      { id: 13, name: "Travel Diaries", description: "Share your travel experiences", isFollowing: false, profilePic: "https://i.pravatar.cc/100?img=17", type: "page" }
+    ];
+
+    // Stories data with default stories
+    let stories = [
+      {
+        id: 1,
+        userId: 5,
+        username: "Vanessa",
+        profilePic: "https://i.pravatar.cc/100?img=9",
+        mediaUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        mediaType: "image",
+        timestamp: new Date(),
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000)
+      },
+      {
+        id: 2,
+        userId: 1,
+        username: "Browny",
+        profilePic: "https://i.pravatar.cc/100?img=5",
+        mediaUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        mediaType: "image",
+        timestamp: new Date(),
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000)
+      },
+      {
+        id: 3,
+        userId: 4,
+        username: "Mrr Hectic",
+        profilePic: "https://i.pravatar.cc/100?img=8",
+        mediaUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        mediaType: "image",
+        timestamp: new Date(),
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000)
+      },
+      {
+        id: 4,
+        userId: 6,
+        username: "Destiny",
+        profilePic: "https://i.pravatar.cc/100?img=10",
+        mediaUrl: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        mediaType: "image",
+        timestamp: new Date(),
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000)
+      }
+    ];
+
+    // DOM elements
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    const welcomeMessage = document.getElementById('welcome-message');
+    const resultsContainer = document.getElementById('results-container');
+    const profileModal = document.getElementById('profile-modal');
+    const modalProfilePic = document.getElementById('modal-profile-pic');
+    const modalName = document.getElementById('modal-name');
+    const modalDescription = document.getElementById('modal-description');
+    const modalRelationship = document.getElementById('modal-relationship');
+    const modalActionBtn = document.getElementById('modal-action-btn');
+    const seeMoreToggle = document.getElementById('see-more-toggle');
+    const seeMoreSection = document.getElementById('see-more-section');
+    const storyGallery = document.getElementById('story-gallery');
+    const createStoryBtn = document.getElementById('create-story');
+    const createStoryModal = document.getElementById('create-story-modal');
+    const storyUploadArea = document.getElementById('story-upload-area');
+    const storyFileInput = document.getElementById('story-file-input');
+    const storyPreview = document.getElementById('story-preview');
+    const previewImage = document.getElementById('preview-image');
+    const previewVideo = document.getElementById('preview-video');
+    const postStoryBtn = document.getElementById('post-story-btn');
+    const storyViewer = document.getElementById('story-viewer');
+    const viewerProfilePic = document.getElementById('viewer-profile-pic');
+    const viewerUsername = document.getElementById('viewer-username');
+    const viewerTime = document.getElementById('viewer-time');
+    const viewerImage = document.getElementById('viewer-image');
+    const viewerVideo = document.getElementById('viewer-video');
+
+    let currentProfile = null;
+    let isSeeMoreExpanded = false;
+    let currentFile = null;
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeStories();
+      setupEventListeners();
+    });
+
+    // Setup event listeners
+    function setupEventListeners() {
+      // Search functionality
+      searchInput.addEventListener('input', handleSearch);
+      
+      // Story creation
+      createStoryBtn.addEventListener('click', openCreateStoryModal);
+      storyUploadArea.addEventListener('click', () => storyFileInput.click());
+      storyFileInput.addEventListener('change', handleFileSelect);
+      
+      // Settings menu
+      seeMoreToggle.addEventListener('click', toggleSeeMore);
+      document.getElementById('dark-btn').addEventListener('click', toggleDarkMode);
+    }
+
+    // Initialize stories in the gallery
+    function initializeStories() {
+      // Clear existing stories (except create story button)
+      const existingStories = storyGallery.querySelectorAll('.story:not(.story-create)');
+      existingStories.forEach(story => story.remove());
+      
+      // Filter stories that haven't expired
+      const validStories = stories.filter(story => story.expiresAt > new Date());
+      
+      // Add stories to gallery
+      validStories.forEach(story => {
+        const storyElement = document.createElement('div');
+        storyElement.className = 'story';
+        storyElement.innerHTML = `
+          <img src="${story.mediaUrl}" alt="${story.username}">
+          <p>${story.username}</p>
+        `;
+        storyElement.addEventListener('click', () => viewStory(story));
+        storyGallery.appendChild(storyElement);
+      });
+    }
+
+    // Search functionality
+    function handleSearch() {
+      const searchTerm = this.value.toLowerCase().trim();
+      
+      if (searchTerm.length === 0) {
+        searchResults.classList.remove('active');
+        welcomeMessage.style.display = 'block';
+        return;
+      }
+      
+      searchResults.classList.add('active');
+      welcomeMessage.style.display = 'none';
+      
+      const filteredFriends = friends.filter(friend => 
+        friend.name.toLowerCase().includes(searchTerm)
+      );
+      
+      const filteredArtists = artists.filter(artist => 
+        artist.name.toLowerCase().includes(searchTerm)
+      );
+      
+      const filteredPages = pages.filter(page => 
+        page.name.toLowerCase().includes(searchTerm)
+      );
+      
+      displayResults(filteredFriends, filteredArtists, filteredPages);
+    }
+
+    // Display search results
+    function displayResults(friendsResults, artistsResults, pagesResults) {
+      resultsContainer.innerHTML = '';
+      
+      if (friendsResults.length === 0 && artistsResults.length === 0 && pagesResults.length === 0) {
+        resultsContainer.innerHTML = '<p>No results found</p>';
+        return;
+      }
+      
+      // Display friends
+      if (friendsResults.length > 0) {
+        friendsResults.forEach(friend => {
+          const resultItem = createResultItem(friend, 'friend');
+          resultsContainer.appendChild(resultItem);
+        });
+      }
+      
+      // Display artists
+      if (artistsResults.length > 0) {
+        artistsResults.forEach(artist => {
+          const resultItem = createResultItem(artist, 'artist');
+          resultsContainer.appendChild(resultItem);
+        });
+      }
+      
+      // Display pages
+      if (pagesResults.length > 0) {
+        pagesResults.forEach(page => {
+          const resultItem = createResultItem(page, 'page');
+          resultsContainer.appendChild(resultItem);
+        });
+      }
+    }
+
+    // Create result item element
+    function createResultItem(profile, type) {
+      const resultItem = document.createElement('div');
+      resultItem.className = 'result-item';
+      
+      let statusText = '';
+      if (type === 'friend') {
+        statusText = '<div class="status friends">Friends</div>';
+      } else {
+        statusText = `<div class="status">${profile.isFollowing ? 'Following' : 'Not Following'}</div>`;
+      }
+      
+      resultItem.innerHTML = `
+        <img src="${profile.profilePic}" alt="${profile.name}">
+        <div class="info">
+          <h4>${profile.name}</h4>
+          <p>${type === 'friend' ? `Studied at ${profile.university}` : profile.description}</p>
+        </div>
+        ${statusText}
+      `;
+      
+      resultItem.addEventListener('click', () => openProfileModal(profile, type));
+      return resultItem;
+    }
+
+    // Story creation functions
+    function openCreateStoryModal() {
+      createStoryModal.style.display = 'flex';
+    }
+
+    function closeCreateStoryModal() {
+      createStoryModal.style.display = 'none';
+      clearPreview();
+    }
+
+    function handleFileSelect(e) {
+      const files = e.target.files;
+      if (files.length > 0) {
+        processFile(files[0]);
+      }
+    }
+
+    function processFile(file) {
+      currentFile = file;
+      
+      // Check file type
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImage.src = e.target.result;
+          previewImage.style.display = 'block';
+          previewVideo.style.display = 'none';
+          storyPreview.style.display = 'block';
+          postStoryBtn.disabled = false;
+        };
+        reader.readAsDataURL(file);
+      } else if (file.type.startsWith('video/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewVideo.src = e.target.result;
+          previewVideo.style.display = 'block';
+          previewImage.style.display = 'none';
+          storyPreview.style.display = 'block';
+          postStoryBtn.disabled = false;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert('Please select an image or video file.');
+        return;
+      }
+    }
+
+    function clearPreview() {
+      currentFile = null;
+      storyPreview.style.display = 'none';
+      previewImage.src = '';
+      previewVideo.src = '';
+      storyFileInput.value = '';
+      postStoryBtn.disabled = true;
+    }
+
+    function postStory() {
+      if (!currentFile) return;
+      
+      // Create a URL for the file
+      const mediaUrl = URL.createObjectURL(currentFile);
+      const mediaType = currentFile.type.startsWith('image/') ? 'image' : 'video';
+      
+      // Create new story
+      const newStory = {
+        id: stories.length + 1,
+        userId: 0, // Current user
+        username: "You",
+        profilePic: "https://i.pravatar.cc/100?img=1",
+        mediaUrl: mediaUrl,
+        mediaType: mediaType,
+        timestamp: new Date(),
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000)
+      };
+      
+      stories.push(newStory);
+      initializeStories();
+      closeCreateStoryModal();
+      alert('Story posted successfully! It will expire in 24 hours.');
+    }
+
+    // Story viewing functions
+    function viewStory(story) {
+      viewerProfilePic.src = story.profilePic;
+      viewerUsername.textContent = story.username;
+      viewerTime.textContent = formatTime(story.timestamp);
+      
+      if (story.mediaType === 'image') {
+        viewerImage.src = story.mediaUrl;
+        viewerImage.style.display = 'block';
+        viewerVideo.style.display = 'none';
+      } else {
+        viewerVideo.src = story.mediaUrl;
+        viewerVideo.style.display = 'block';
+        viewerImage.style.display = 'none';
+      }
+      
+      storyViewer.style.display = 'flex';
+      
+      // Auto-close after 10 seconds for videos, or stay open for images
+      if (story.mediaType === 'video') {
+        setTimeout(() => {
+          if (storyViewer.style.display === 'flex') {
+            closeStoryViewer();
+          }
+        }, 10000);
+      }
+    }
+
+    function closeStoryViewer() {
+      storyViewer.style.display = 'none';
+      if (viewerVideo) viewerVideo.pause();
+    }
+
+    function sendStoryReply() {
+      const replyInput = document.getElementById('story-reply-input');
+      const message = replyInput.value.trim();
+      
+      if (message) {
+        alert(`Reply sent: ${message}`);
+        replyInput.value = '';
+      }
+    }
+
+    // Profile modal functions
+    function openProfileModal(profile, type) {
+      currentProfile = profile;
+      
+      modalProfilePic.src = profile.profilePic;
+      modalName.textContent = profile.name;
+      
+      if (type === 'friend') {
+        modalDescription.textContent = `Studied at ${profile.university}`;
+        modalRelationship.textContent = 'Friends';
+        modalActionBtn.style.display = 'none';
+      } else if (type === 'artist' || type === 'page') {
+        modalDescription.textContent = profile.description;
+        modalRelationship.textContent = profile.isFollowing ? 'Following' : 'Not Following';
+        modalActionBtn.style.display = 'block';
+        modalActionBtn.textContent = profile.isFollowing ? 'Unfollow' : 'Follow';
+        modalActionBtn.className = profile.isFollowing ? 'btn btn-primary following' : 'btn btn-primary';
+      }
+      
+      profileModal.style.display = 'flex';
+    }
+
+    function closeProfileModal() {
+      profileModal.style.display = 'none';
+    }
+
+    function toggleFollow() {
+      if (currentProfile && !currentProfile.isFriend) {
+        currentProfile.isFollowing = !currentProfile.isFollowing;
+        modalActionBtn.textContent = currentProfile.isFollowing ? 'Unfollow' : 'Follow';
+        modalActionBtn.className = currentProfile.isFollowing ? 'btn btn-primary following' : 'btn btn-primary';
+        modalRelationship.textContent = currentProfile.isFollowing ? 'Following' : 'Not Following';
+        
+        // Update the profile in the appropriate array
+        if (currentProfile.type === 'artist') {
+          const artistIndex = artists.findIndex(a => a.id === currentProfile.id);
+          if (artistIndex !== -1) {
+            artists[artistIndex].isFollowing = currentProfile.isFollowing;
+          }
+        } else if (currentProfile.type === 'page') {
+          const pageIndex = pages.findIndex(p => p.id === currentProfile.id);
+          if (pageIndex !== -1) {
+            pages[pageIndex].isFollowing = currentProfile.isFollowing;
+          }
+        }
+        
+        // Update search results if the search is still active
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        if (searchTerm.length > 0) {
+          const filteredFriends = friends.filter(friend => 
+            friend.name.toLowerCase().includes(searchTerm)
+          );
+          
+          const filteredArtists = artists.filter(artist => 
+            artist.name.toLowerCase().includes(searchTerm)
+          );
+          
+          const filteredPages = pages.filter(page => 
+            page.name.toLowerCase().includes(searchTerm)
+          );
+          
+          displayResults(filteredFriends, filteredArtists, filteredPages);
+        }
+      }
+    }
+
+    // Utility functions
+    function formatTime(date) {
+      return new Date(date).toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      });
+    }
+
+    // Settings menu toggle
+    function settingsMenuToggle() {
+      const settingsMenu = document.querySelector('.settings-menu');
+      settingsMenu.classList.toggle('settings-menu-height');
+    }
+
+    // See More toggle
+    function toggleSeeMore() {
+      isSeeMoreExpanded = !isSeeMoreExpanded;
+      
+      if (isSeeMoreExpanded) {
+        seeMoreSection.classList.add('expanded');
+        seeMoreToggle.classList.add('expanded');
+        seeMoreToggle.querySelector('span').innerHTML = 'See Less <i class="fas fa-chevron-up arrow"></i>';
+        document.querySelector('.settings-menu').classList.add('settings-menu-expanded');
+      } else {
+        seeMoreSection.classList.remove('expanded');
+        seeMoreToggle.classList.remove('expanded');
+        seeMoreToggle.querySelector('span').innerHTML = 'See More <i class="fas fa-chevron-down arrow"></i>';
+        document.querySelector('.settings-menu').classList.remove('settings-menu-expanded');
+      }
+    }
+
+    // Dark mode toggle
+    function toggleDarkMode() {
+      const darkBtn = document.getElementById('dark-btn');
+      darkBtn.classList.toggle('dark-btn-on');
+      document.body.classList.toggle('dark-theme');
+    }
+
+    // Initialize with welcome message
+    searchResults.classList.remove('active');
+    welcomeMessage.style.display = 'block';
+  </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialNet Settings</title>
+<link rel="stylesheet" href="settings.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo" style="font-family:'Segoe Script', cursive; font-size:30px; color:#A4B569;">SocialNet</div>
+            <div class="user-info">
+                <div class="user-avatar"> Dê</div>
+                <span> Dêstîñëë Dèstîñëë</span>
+            </div>
+        </header>
+
+        <div class="settings-container">
+            <div class="sidebar">
+                <div class="sidebar-item active" data-section="general">
+                    <span>⚙️</span> General
+                </div>
+                <div class="sidebar-item" data-section="privacy">
+                    <span>🔒</span> Privacy
+                </div>
+                <div class="sidebar-item" data-section="notifications">
+                    <span>🔔</span> Notifications
+                </div>
+                <div class="sidebar-item" data-section="language">
+                    <span>🌐</span> Language & Region
+                </div>
+                <div class="sidebar-item" data-section="accessibility">
+                    <span>♿</span> Accessibility
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- General Settings -->
+                <div class="settings-section active" id="general">
+                    <h2 class="section-title">General Account Settings</h2>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Dark Mode</div>
+                            <div class="setting-description">Switch between light and dark themes</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Username</div>
+                            <div class="setting-description">Your unique username on SocialNet</div>
+                            <div class="editable-field">
+                                <span class="field-value" id="username-value"> Dêstîñëë</span>
+                                <input type="text" class="field-input" id="username-input" value="john.doe.123" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary btn-sm" id="username-edit-btn">Edit</button>
+                            <button class="btn btn-success btn-sm" id="username-save-btn" style="display: none;">Save</button>
+                            <button class="btn btn-danger btn-sm" id="username-cancel-btn" style="display: none;">Cancel</button>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Email</div>
+                            <div class="setting-description">Your primary email address</div>
+                            <div class="editable-field">
+                                <span class="field-value" id="email-value"> Dêstîñëë@example.com</span>
+                                <input type="email" class="field-input" id="email-input" value=" Dêstîñëë@example.com" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary btn-sm" id="email-edit-btn">Edit</button>
+                            <button class="btn btn-success btn-sm" id="email-save-btn" style="display: none;">Save</button>
+                            <button class="btn btn-danger btn-sm" id="email-cancel-btn" style="display: none;">Cancel</button>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Mobile</div>
+                            <div class="setting-description">Your mobile phone number</div>
+                            <div class="editable-field">
+                                <span class="field-value" id="mobile-value">+27 234 567 8900</span>
+                                <input type="tel" class="field-input" id="mobile-input" value="+1 234 567 8900" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary btn-sm" id="mobile-edit-btn">Edit</button>
+                            <button class="btn btn-success btn-sm" id="mobile-save-btn" style="display: none;">Save</button>
+                            <button class="btn btn-danger btn-sm" id="mobile-cancel-btn" style="display: none;">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div class="settings-section" id="privacy">
+                    <h2 class="section-title">Privacy Settings</h2>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Who can see your future posts?</div>
+                            <div class="setting-description">Control who can see what you share</div>
+                        </div>
+                        <select id="post-visibility">
+                            <option>Friends</option>
+                            <option>Public</option>
+                            <option>Only Me</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Who can send you friend requests?</div>
+                            <div class="setting-description">Control who can add you as a friend</div>
+                        </div>
+                        <select id="friend-requests">
+                            <option>Everyone</option>
+                            <option>Friends of Friends</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Who can look you up using the email address you provided?</div>
+                            <div class="setting-description">Control who can find you using your email</div>
+                        </div>
+                        <select id="email-search">
+                            <option>Everyone</option>
+                            <option>Friends</option>
+                            <option>Friends of Friends</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="settings-section" id="notifications">
+                    <h2 class="section-title">Notification Settings</h2>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Push Notifications</div>
+                            <div class="setting-description">Receive notifications in your browser</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="push-notifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Email Notifications</div>
+                            <div class="setting-description">Receive notifications via email</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="email-notifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">SMS Notifications</div>
+                            <div class="setting-description">Receive notifications via SMS</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="sms-notifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Language & Region Settings -->
+                <div class="settings-section" id="language">
+                    <h2 class="section-title">Language & Region</h2>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">SocialNet Language</div>
+                            <div class="setting-description">Change the language SocialNet is displayed in</div>
+                        </div>
+                        <select id="language-select">
+                            <option>English (US)</option>
+                            <option>Español</option>
+                            <option>Français</option>
+                            <option>Deutsch</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Region</div>
+                            <div class="setting-description">Set your region for localized content</div>
+                        </div>
+                        <select id="region-select">
+                            <option>United States</option>
+                            <option>United Kingdom</option>
+                            <option>Canada</option>
+                            <option>Australia</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Date Format</div>
+                            <div class="setting-description">Choose how dates are displayed</div>
+                        </div>
+                        <select id="date-format">
+                            <option>Month/Day/Year</option>
+                            <option>Day/Month/Year</option>
+                            <option>Year/Month/Day</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Accessibility Settings -->
+                <div class="settings-section" id="accessibility">
+                    <h2 class="section-title">Accessibility</h2>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Keyboard Navigation</div>
+                            <div class="setting-description">Enable keyboard shortcuts</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="keyboard-nav">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">High Contrast Mode</div>
+                            <div class="setting-description">Increase color contrast for better visibility</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="high-contrast">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-title">Text Size</div>
+                            <div class="setting-description">Adjust the size of text on SocialNet</div>
+                        </div>
+                        <select id="text-size">
+                            <option>Small</option>
+                            <option selected>Medium</option>
+                            <option>Large</option>
+                            <option>Extra Large</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Settings saved successfully!</div>
+
+    <script src="settings.js"></script>
+</body>
+</html>

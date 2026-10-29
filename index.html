@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocialNet</title>
+  <link rel ="stylesheet"href="styledashboard.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-left">
+      <h2 style="font-family:'Segoe Script', cursive; font-size:30px; color:#A4B569;">SocialNet</h2>
+      <ul>
+	    <li><a href="dashboard.php"> <a href="#"><img src="home.gif"></a></li>
+       <li><a href="friends.php"> <a href="#"><img src="friends.gif"></a></li>
+       <li><a href="message.php"> <a href="#"><img src="message.gif"></a></li>
+        <li><a href="notification.html"><img src="watch.gif" alt="Notification"></a></li>
+        <li><a href="watch.php"><img src="Notification.gif" alt="Watch"></a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN2MxLjA1LTEuMjQgMS42Ny0yLjg5IDEuNjctNC42YzAtNC4wMS0zLjI1LTcuMjUtNy4yNS03LjI1cy03LjI1IDMuMjQtNy4yNSA3LjI1czMuMjQgNy4yNSA3LjI1IDcuMjVjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUuNzUgNS43NWwxLjc1LTEuNzUtNS43Ni01Ljc0em0tNiAwYy0yLjY5IDAtNC44OC0yLjE5LTQuODgtNC44OHMyLjE5LTQuODggNC44OC00Ljg4czQuODggMi4xOSA0Ljg4IDQuODgtMi4xOSA0Ljg4LTQuODggNC44OHoiLz48L3N2Zz4=">
+        <input type="text" placeholder="Search" id="searchInput">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-user-icon online" onclick="settingsMenuToggle()">
+      <img src="profile-pic.jpg">
+    </div>
+    
+    <!-- Settings Menu -->
+   <div class="settings-menu">
+    <!-- existing links -->
+    <div class="settings-links">
+        <img src="Group.gif" class="settings-icon"> <a href="#">Groups</a>
+    </div>
+    <div class="settings-links">
+        <img src="watch.gif" class="settings-icon"> <a href="#">watch</a>
+    </div>
+	    <div class="settings-links">
+        <img src="flag.png" class="settings-icon"> <a href="pages.html">pages</a>
+    </div>
+    <div class="more-links" style="display: none;">
+        <div class="settings-links">
+            <img src="birthday.gif" class="settings-icon"> <a href="birthday.html">Birthdays</a>
+        </div>
+        <div class="settings-links">
+            <img src="memories.png" class="settings-icon"> <a href="memories">Memories</a>
+        </div>
+        <div class="settings-links">
+            <img src="save.gif" class="settings-icon"> <a href="saved">Saved</a>
+        </div>
+        <div class="settings-links">
+            <img src="Settings.gif" class="settings-icon"> <a href="#">Settings & Privacy</a>
+        </div>
+        <div class="settings-links">
+            <img src="logout.gif" class="settings-icon"> <a href="index.php">logout</a>
+        </div>
+		
+    </div>
+    <div class="see-more" id="seeMoreBtn">
+        <a> <img src="arrow.jpg" class="see-more-icon" style="width: 25px; margin-right:15px;">See More </a>
+    </div>
+</div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Left Sidebar -->
+    <div class="left-sidebar">
+
+    </div>
+    
+      <!-- main-content-->
+  <div class="main-content">
+  
+  <div class="story-gallery">
+        <div class="story story1" onclick="openStoryUpload()">
+          <img src="uploadit.png">
+          <p>Post Story</p>
+        </div>
+    <div class="story story2" data-story-id="2">
+  <img src="member-2.jpg">
+  <p>Browniiey baddie</p>
+  </div>
+    <div class="story story3" data-story-id="3">
+  <img src="member-6.jpg">
+  <p>venessa</p>
+  </div>
+    <div class="story story4" data-story-id="4">
+  <img src="member-3.jpg">
+  <p>Trust</p>
+  </div>
+    <div class="story story5" data-story-id="5">
+  <img src="member-1.jpg">
+  <p>Destiny</p>
+  </div>
+    <div class="story story6" data-story-id="6">
+  <img src="redmoon.jpg">
+  <p>Mrr Hectic</p>
+  </div>
+  </div>
+  
+  
+    <div class="write-post-contaier">
+  <div class="user-profile">
+    <img src="profile-pic.jpg">
+ <div>
+  <p> Dêstîñëë Dèstîñëë</p>
+  <small> <p style="color:gray;">Public </p> <i class="fas fa-caret-down"></i></small>
+  </div>
+      </div>
+	 
+	  <div class="post-input-container">
+	  <div class="post-row">
+	    <div class="post-container">
+    <div class="user-profile">
+    <img src="profile-pic.jpg">
+ <div>
+  <p> Dêstîñëë Dèstîñëë</p>
+  <span> june 24 2025, 13:40</span>
+  </div>
+  <a href="#"><i class="fas fa-ellipsi"></i></a>
+      </div>
+	  <textarea rows="3" placeholder="What's on your mind Dêstîñëë Dèstîñëë?"></textarea>
+	  <div class="add-post-links">
+	  <a href="#"><img src="video.jpg">Live Video</a>
+	  <a href="#"><img src="camera.jpg">Photos/video</a>
+	  <a href="#"><img src="feelings.jpg">Feelings/activity</a>
+	  </div>
+	  
+  
+  </div>
+
+	    <div class="post-container">
+    <div class="user-profile">
+    <img src="profile-pic.jpg">
+ <div>
+  <p> Dêstîñëë Dèstîñëë</p>
+  <span> Just Now</span>
+  </div>
+  <a href="#"><i class="fas fa-ellipsi"></i></a>
+      </div>
+
+  
+	  <p class="post-text">watch YouTube Tutorials to learn Full stack Development @YouTube Channel to watch more videos for Web Design, web Development course, etc. <a href="#"> #courseEra</a>
+	  <a href="#"> #YouTubeChannel</a></p>
+  <img src="coursera.jpg" style=" width: 100%;height:70%;margin-bottom: 1px;border-radius:4px;" class="post-img">
+  	  <div class="contaier-post">
+	  <div class="add-post-links">
+	  <a href="#"><img src="like.png"></a>
+	  <a href="#"><img src="comment.jpg"></a>
+	  <a href="#"><img src="share.jpg"></a>
+	
+	  
+<div class="post-profile-icon">
+  <img src="profile-pic.jpg"  <img src="profile-pic.jpg" style="width: 40px; height: 40px; border-radius: 50%; text-align:left;"alt="Browniiey"><i class="fas fa-caret-down"></i>  <i class="fas fa-caret-down"></i> 
+ 
+  </div>
+  </div>
+  </div> 
+  </div>
+  	    <div class="post-container">
+    <div class="user-profile">
+    <img src="member-2.jpg">
+ <div>
+  <p> Browniiey baddie</p>
+  <span> September 10</span>
+  </div>
+  <a href="#"><i class="fas fa-ellipsi"></i></a>
+      </div>
+
+  
+	  <p class="post-text">
+	    Picture Perfect 📷📸 <p style="color:blue"></p>
+  <img src="status-3.jpg" style="width: 100%;height:70%;margin-bottom: 1px;border-radius:4px;" class="post-img">
+  	  <div class="contaier-post">
+	  <div class="add-post-links">
+	  <a href="#"><img src="like.png">30</a>
+	  <a href="#"><img src="comment.jpg">5</a>
+	  <a href="#"><img src="share.jpg">3</a>
+	  <div class="post-profile-icon">
+  <img src="profile-pic.jpg" style="width: 40px; height: 40px; border-radius: 50%; text-align:left;"alt="Browniiey"><i class="fas fa-caret-down"></i>  <i class="fas fa-caret-down"></i> 
+ 
+  </div>
+	  </div>
+</div>
+ 
+  </div>
+   <div class="post-container">
+    <div class="user-profile">
+    <img src="member-1.jpg">
+ <div>
+  <p> Dalvin Moore</p>
+  <span> September 15</span>
+  </div>
+  <a href="#"><i class="fas fa-ellipsi"></i></a>
+      </div>
+
+  
+	  <p class="post-text">
+	   Facts👌🤞
+	  </p>
+  <img src="post.jpg" style="width: 49%;height:18%;margin-bottom: 1px;border-radius:4px;" class="post-img">
+  	  <div class="contaier-post">
+	  <div class="add-post-links">
+	  <a href="#"><img src="like.png">18</a>
+	  <a href="#"><img src="comment.jpg">1</a>
+	  <a href="#"><img src="share.jpg">2</a>
+	  <div class="post-profile-icon">
+  <img src="profile-pic.jpg" style="width: 40px; height: 40px; border-radius: 50%; text-align:left;"alt="Browniiey"><i class="fas fa-caret-down"></i>  <i class="fas fa-caret-down"></i> 
+ 
+  </div>
+	  </div>
+</div>
+ 
+  </div>
+   <div class="post-container">
+    <div class="user-profile">
+    <img src="member-3.jpg">
+ <div>
+  <p> Thandolwethu Ngubane</p>
+  <span> September 01</span>
+  </div>
+  <a href="#"><i class="fas fa-ellipsi"></i></a>
+      </div>
+
+  
+	  <p class="post-text">
+	   have Friends but don't trust them <p style="color:blue">
+	  </p>
+  <img src="trust-no-one.jpg" style="width: 100%;height:70%;margin-bottom: 1px;border-radius:4px;" class="post-img">
+  	  <div class="contaier-post">
+	  <div class="add-post-links">
+	  <a href="#"><img src="like.png">120</a>
+	  <a href="#"><img src="comment.jpg">45</a>
+	  <a href="#"><img src="share.jpg">20</a>
+	  <div class="post-profile-icon">
+  <img src="profile-pic.jpg" style="width: 40px; height: 40px; border-radius: 50%; text-align:left;"alt="Browniiey"><i class="fas fa-caret-down"></i>  <i class="fas fa-caret-down"></i> 
+ 
+  </div>
+	  </div>
+</div>
+ 
+  </div>
+  
+   <div class="post-container">
+    <div class="user-profile">
+    <img src="member-1.jpg">
+ <div>
+  <p> dest iny</p>
+  <span> August 30</span>
+  </div>
+  <a href="#"><i class="fas fa-ellipsi"></i></a>
+      </div>
+
+  
+	  <p class="post-text">
+	   holiday vibes <p style="color:blue">#vacation holiday</p> <p style="color:blue">@sun city
+	  </p>
+  <img src="suncity.jpg" style="width: 100%;height:70%;margin-bottom: 1px;border-radius:4px;" class="post-img">
+  	  <div class="contaier-post">
+	  <div class="add-post-links">
+	  <a href="#"><img src="like.png">10</a>
+	  <a href="#"><img src="comment.jpg">45</a>
+	  <a href="#"><img src="share.jpg">20</a>
+	  <div class="post-profile-icon">
+  <img src="profile-pic.jpg" style="width: 40px; height: 40px; border-radius: 50%; text-align:left;"alt="Browniiey"><i class="fas fa-caret-down"></i>  <i class="fas fa-caret-down"></i> 
+ 
+  </div>
+	  </div>
+</div>
+ 
+  </div>
+   <div class="post-container">
+    <div class="user-profile">
+    <img src="member-6.jpg">
+ <div>
+  <p> venessa</p>
+  <span> August 30</span>
+  </div>
+  <a href="#"><i class="fas fa-ellipsi"></i></a>
+      </div>
+
+  
+	  <p class="post-text">
+	   💫💫Life is Good explore while you can 💫🚀<p style="color:blue">#LifeJourney</p> <p style="color:blue">
+	  </p>
+  <img src="status-1.jpg" style="width: 100%;height:70%;margin-bottom: 1px;border-radius:4px;" class="post-img">
+  	  <div class="contaier-post">
+	  <div class="add-post-links">
+	  <a href="#"><img src="like.png">120</a>
+	  <a href="#"><img src="comment.jpg">45</a>
+	  <a href="#"><img src="share.jpg">20</a>
+	  <div class="post-profile-icon">
+  <img src="profile-pic.jpg" style="width: 40px; height: 40px; border-radius: 50%; text-align:left;"alt="Browniiey"><i class="fas fa-caret-down"></i>  <i class="fas fa-caret-down"></i> 
+ 
+  </div>
+	  </div>
+</div>
+ 
+  </div>
+  
+  </div></div> </div>
+  <button type="button"style="	display: block;
+	margin: auto;
+	cursor:pointer;
+	padding: 5px 10px;
+	border: 1px solid #0c1c47;
+	color:#fff;
+	background: #0c1c47;
+	border-radius: 4px;">Load More</button>
+  </div>
+    <!-- right-sidebar-->
+ <div class="right-sidebar">
+  
+  <div class="sidebar-title">
+  <h4>Events</h4>
+  <a href="#">See All</a>
+  </div>
+  
+  <div class="event">
+    <div class="left-event">
+	<h2> 18</h3>
+	<span> March</span>
+	</div>
+	<div class="right-event">
+	<h4>Dance Party</h4>
+	<p>Pretoria Garderns</p>
+	<a href="#">More info</a>
+ </div>
+ </div>
+ 
+   <div class="event">
+    <div class="left-event">
+	<h2> 22</h3>
+	<span> june</span>
+	</div>
+	<div class="right-event">
+	<h4>Web Design Bootcamp (WDB)</h4>
+	<p>Pretoria Garderns</p>
+	<a href="#">More info</a>
+ </div>
+ </div>
+  <div class="sidebar-title">
+    <h4>Advertisnment</h4>
+	<a href="#">Close</a> 
+ </div>
+   <img src="Advertisment.jpg" class="sidebar-ads">
+   
+
+   </div>  
+ </div>
+ 
+ <!-- Story Modal -->
+<div class="story-modal" id="storyModal">
+  <div class="modal-content">
+    <div class="story-progress" id="storyProgress"></div>
+    <div class="modal-header">
+      <img id="modalUserImg" src="" alt="User">
+      <div class="user-info">
+        <p id="modalUserName"></p>
+        <span id="modalTimeAgo"></span>
+      </div>
+      <button class="close-modal" onclick="closeStoryModal()">×</button>
+    </div>
+    <div class="modal-body" id="modalStoryBody">
+      <!-- Story content will be inserted here -->
+    </div>
+    <div class="modal-footer">
+      <p id="modalStoryText"></p>
+    </div>
+  </div>
+</div>
+<script>
+document.getElementById('seeMoreBtn').addEventListener('click', function() {
+    var moreLinks = document.querySelector('.more-links');
+    if (moreLinks.style.display === 'none') {
+        moreLinks.style.display = 'block';
+        this.innerHTML = '<a> <img src="arrow.jpg" class="see-more-icon" style="width: 25px; margin-right:15px;">See Less </a>';
+    } else {
+        moreLinks.style.display = 'none';
+        this.innerHTML = '<a> <img src="arrow.jpg" class="see-more-icon" style="width: 25px; margin-right:15px;">See More </a>';
+    }
+});
+</script>
+<script src="scriptdashboard.js"></script>
+ </body>
+</html>

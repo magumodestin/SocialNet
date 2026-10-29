@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Following - SocialNet</title>
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">SocialNet</a>
+                <div class="nav-links">
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Friends</a>
+                    <a href="#">Groups</a>
+                    <a href="#">Watch</a>
+                    <a href="#">Marketplace</a>
+                </div>
+                <div class="header-right">
+                    <button class="theme-toggle" id="themeToggle">☀️</button>
+                    <div class="user-profile">
+                        <div class="user-avatar">Y</div>
+                        <span>Dêstîñëë Dèstîñëë</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>Menu</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active">Following</a></li>
+                    <li><a href="#">Followers</a></li>
+                    <li><a href="#">Friend Requests</a></li>
+                    <li><a href="#">Suggestions</a></li>
+                    <li><a href="#">Birthdays</a></li>
+                </ul>
+            </div>
+            
+            <div class="content">
+                <div class="content-header">
+                    <h1>People You Follow</h1>
+                    <div class="search-box">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--secondary-text)">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                        <input type="text" id="searchInput" placeholder="Search following...">
+                    </div>
+                </div>
+                
+                <div class="following-list" id="followingList">
+                    <!-- Following cards will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Profile Modal -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-content">
+            <button class="close-btn" id="closeModal">&times;</button>
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar"></div>
+                <div class="profile-info">
+                    <div class="profile-name" id="profileName"></div>
+                    <div class="profile-location" id="profileLocation"></div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-value" id="postsCount">0</div>
+                            <div class="stat-label">Posts</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="followersCount">0</div>
+                            <div class="stat-label">Followers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="followingCount">0</div>
+                            <div class="stat-label">Following</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-following" id="followButton">Following</button>
+                </div>
+            </div>
+            <div class="profile-posts">
+                <h2>Latest Posts</h2>
+                <div class="posts-grid" id="postsGrid">
+                    <!-- Posts will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 SocialNet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="pages.js"></script>
+</body>
+</html>

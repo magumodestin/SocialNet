@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memories Collection | Front-end & Travel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary-color: #4895ef;
+            --secondary-color: #4361ee;
+            --accent-color: #4cc9f0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e9ecef;
+            --border-color: #333333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+        }
+
+        .sun-icon {
+            color: #ffc107;
+        }
+
+        .moon-icon {
+            color: #6c757d;
+        }
+
+        .dark-mode .sun-icon {
+            color: #ffc107;
+        }
+
+        .dark-mode .moon-icon {
+            color: #e9ecef;
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            box-shadow: var(--shadow);
+        }
+
+        .category-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .category-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .memory-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .memory-image {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .memory-video {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .memory-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .memory-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .memory-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        .memory-description {
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .memory-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .memory-links {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .memory-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--primary-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .memory-link:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .memory-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-container, .video-container {
+            position: relative;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .memories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .categories {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .memories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .memory-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-memory"></i>
+                <span>Memories Collection</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun sun-icon"></i>
+                <i class="fas fa-moon moon-icon"></i>
+                <span>Toggle Theme</span>
+            </button>
+        </header>
+
+        <div class="categories">
+            <button class="category-btn active" data-category="all">All Memories</button>
+            <button class="category-btn" data-category="frontend">Front-end</button>
+            <button class="category-btn" data-category="travel">Travel</button>
+            <button class="category-btn" data-category="projects">Projects</button>
+            <button class="category-btn" data-category="learning">Learning</button>
+        </div>
+
+        <div class="memories-grid" id="memoriesContainer">
+            <!-- Memories will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light mode
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Save the current theme to localStorage
+            const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme);
+        });
+
+        // Category filtering functionality
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const memoriesContainer = document.getElementById('memoriesContainer');
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const category = button.getAttribute('data-category');
+                filterMemories(category);
+            });
+        });
+
+        // Sample memories data
+        const memories = [
+            {
+                id: 1,
+                title: "First React Project",
+                type: "frontend",
+                description: "Built my first React application - a weather dashboard with API integration. Learned about components, state, and hooks.",
+                date: "2022-03-15",
+                tags: ["react", "javascript", "api"],
+                image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                links: [
+                    { text: "GitHub Repo", url: "https://github.com", icon: "fab fa-github" },
+                    { text: "Live Demo", url: "https://react-weather-demo.netlify.app", icon: "fas fa-external-link-alt" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Bali Trip 2021",
+                type: "travel",
+                description: "Two weeks exploring the beautiful island of Bali. Visited Ubud, Seminyak, and the stunning waterfalls in the north.",
+                date: "2021-08-22",
+                tags: ["bali", "indonesia", "beach", "culture"],
+                image: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                links: [
+                    { text: "Google Photos", url: "https://photos.google.com", icon: "fas fa-images" },
+                    { text: "Travel Blog", url: "https://my-travel-blog.com/bali-2021", icon: "fas fa-blog" }
+                ]
+            },
+            {
+                id: 3,
+                title: "CSS Grid Mastery",
+                type: "learning",
+                description: "Completed an intensive course on CSS Grid layout. Now able to create complex responsive layouts with ease.",
+                date: "2022-06-10",
+                tags: ["css", "grid", "layout", "responsive"],
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                links: [
+                    { text: "Course Notes", url: "https://docs.google.com/document/d/12345", icon: "fas fa-file-alt" },
+                    { text: "CodePen Examples", url: "https://codepen.io/collection/abc123", icon: "fab fa-codepen" }
+                ]
+            },
+            {
+                id: 4,
+                title: "Swiss Alps Adventure",
+                type: "travel",
+                description: "Hiking in the Swiss Alps was breathtaking. The views from Jungfraujoch were absolutely worth the journey.",
+                date: "2023-01-05",
+                tags: ["switzerland", "alps", "hiking", "mountains"],
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                links: [
+                    { text: "Google Maps", url: "https://goo.gl/maps/abc123", icon: "fas fa-map-marked-alt" },
+                    { text: "Photo Album", url: "https://photos.app.goo.gl/xyz789", icon: "fas fa-camera" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Portfolio Website",
+                type: "projects",
+                description: "Designed and developed my personal portfolio website using HTML, CSS, and vanilla JavaScript.",
+                date: "2022-09-18",
+                tags: ["html", "css", "javascript", "portfolio"],
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                links: [
+                    { text: "Live Site", url: "https://myportfolio.dev", icon: "fas fa-external-link-alt" },
+                    { text: "Source Code", url: "https://github.com/myusername/portfolio", icon: "fab fa-github" }
+                ]
+            },
+            {
+                id: 6,
+                title: "Tokyo City Exploration",
+                type: "travel",
+                description: "Two weeks in Tokyo exploring the blend of traditional culture and futuristic technology.",
+                date: "2020-11-12",
+                tags: ["japan", "tokyo", "city", "culture"],
+                image: "https://images.unsplash.com/photo-1540959733332-8ab48a8709f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                links: [
+                    { text: "Travel Itinerary", url: "https://docs.google.com/spreadsheets/d/12345", icon: "fas fa-list" },
+                    { text: "Photo Gallery", url: "https://photos.google.com/album/abc123", icon: "fas fa-images" }
+                ]
+            },
+            {
+                id: 7,
+                title: "Vue.js Learning Journey",
+                type: "frontend",
+                description: "Started learning Vue.js framework. Built several small projects to understand the reactivity system and component architecture.",
+                date: "2023-02-28",
+                tags: ["vue", "javascript", "framework", "components"],
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                links: [
+                    { text: "Vue Docs", url: "https://vuejs.org", icon: "fas fa-book" },
+                    { text: "Practice Projects", url: "https://github.com/myusername/vue-practice", icon: "fab fa-github" }
+                ]
+            },
+            {
+                id: 8,
+                title: "Sass Implementation",
+                type: "frontend",
+                description: "Converted a large CSS codebase to Sass. Improved maintainability with variables, mixins, and nested rules.",
+                date: "2022-11-05",
+                tags: ["sass", "css", "preprocessor", "styling"],
+                image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                links: [
+                    { text: "Sass Guide", url: "https://sass-lang.com/guide", icon: "fas fa-code" },
+                    { text: "Before/After", url: "https://codepen.io/collection/xyz123", icon: "fab fa-codepen" }
+                ]
+            }
+        ];
+
+        // Function to render memories
+        function renderMemories(memoriesToRender) {
+            memoriesContainer.innerHTML = '';
+            
+            if (memoriesToRender.length === 0) {
+                memoriesContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search fa-2x" style="margin-bottom: 15px;"></i>
+                        <h3>No memories found</h3>
+                        <p>Try selecting a different category</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            memoriesToRender.forEach(memory => {
+                const memoryElement = document.createElement('div');
+                memoryElement.className = 'memory-card';
+                
+                let mediaContent = '';
+                if (memory.video) {
+                    mediaContent = `
+                        <div class="video-container">
+                            <iframe class="memory-video" src="${memory.video}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                            <div class="memory-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    mediaContent = `
+                        <div class="image-container">
+                            <img src="${memory.image}" alt="${memory.title}" class="memory-image">
+                            <div class="memory-icon">
+                                <i class="fas fa-${getIconForType(memory.type)}"></i>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                let linksHTML = '';
+                if (memory.links && memory.links.length > 0) {
+                    linksHTML = `
+                        <div class="memory-links">
+                            ${memory.links.map(link => `
+                                <a href="${link.url}" target="_blank" class="memory-link">
+                                    <i class="${link.icon}"></i>
+                                    ${link.text}
+                                </a>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+                
+                memoryElement.innerHTML = `
+                    ${mediaContent}
+                    <div class="memory-content">
+                        <h3 class="memory-title">${memory.title}</h3>
+                        <div class="memory-meta">
+                            <span>${formatDate(memory.date)}</span>
+                            <span>${capitalizeFirstLetter(memory.type)}</span>
+                        </div>
+                        <p class="memory-description">${memory.description}</p>
+                        <div class="memory-tags">
+                            ${memory.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        ${linksHTML}
+                    </div>
+                `;
+                
+                memoriesContainer.appendChild(memoryElement);
+            });
+        }
+
+        // Helper functions
+        function getIconForType(type) {
+            const icons = {
+                'frontend': 'code',
+                'travel': 'map-marked-alt',
+                'projects': 'project-diagram',
+                'learning': 'graduation-cap'
+            };
+            return icons[type] || 'bookmark';
+        }
+
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Filter memories by category
+        function filterMemories(category) {
+            if (category === 'all') {
+                renderMemories(memories);
+            } else {
+                const filteredMemories = memories.filter(memory => memory.type === category);
+                renderMemories(filteredMemories);
+            }
+        }
+
+        // Initial render
+        renderMemories(memories);
+    </script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SocialNet</title>
+  <link rel="stylesheet" href="stylo.css" />
+  <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <h2 style="font-family:'Segoe Script', cursive; font-size:30px; color:green;">SocialNet</h2>
+      <ul>
+        <li><img src="notification.jpg" alt="Notification" /></li>
+        <li><img src="message.jpg" alt="Message" /></li>
+        <li><img src="watch.jpg" alt="Watch" /></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+
+  <div class="search-box">
+    <img src="search.jpg" alt="Search" />
+    <input type="text" id="searchInput" placeholder="Search users..." autocomplete="off" />
+    <ul id="userList"></ul>
+    <div id="profile" style="display:none; margin-top: 10px;">
+      <div class="profile-pic" id="profilePic" style="width:40px; height:40px; border-radius:50%; color:white; font-weight:bold; display:flex; justify-content:center; align-items:center; font-size:18px;"></div>
+      <div class="profile-info" style="display:inline-block; margin-left:10px;">
+        <h3 id="profileName" style="margin:0;"></h3>
+        <p id="profileDesc" style="margin:0; font-size: 12px; color: gray;"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Paste the JS code here
+    const users = [
+      {
+        name: "Dêstîñëë Dèstîñëë",
+        pic: "profile-pic.jpg",
+        info: "Full Stack Developer, Loves coding and coffee."
+      },
+      {
+        name: "Browniiey baddie",
+        pic: "member-2.jpg",
+        info: "Front-end Designer and UI/UX enthusiast."
+      },
+      {
+        name: "venessa",
+        pic: "member-6.jpg",
+        info: "Creative artist and content creator."
+      },
+      {
+        name: "Trust",
+        pic: "member-3.jpg",
+        info: "Tech Blogger and Entrepreneur."
+      },
+      {
+        name: "Dalvin Moore",
+        pic: "member-1.jpg",
+        info: "Photographer and traveler."
+      }
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const userList = document.getElementById("userList");
+    const profile = document.getElementById("profile");
+    const profilePic = document.getElementById("profilePic");
+    const profileName = document.getElementById("profileName");
+    const profileDesc = document.getElementById("profileDesc");
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase().trim();
+      userList.innerHTML = "";
+      profile.style.display = "none";
+
+      if (query.length === 0) {
+        userList.style.display = "none";
+        return;
+      }
+
+      const filteredUsers = users.filter(user => user.name.toLowerCase().includes(query));
+
+      if (filteredUsers.length === 0) {
+        userList.style.display = "none";
+        return;
+      }
+
+      filteredUsers.forEach(user => {
+        const li = document.createElement("li");
+        li.textContent = user.name;
+        li.style.cursor = "pointer";
+        li.style.padding = "5px 10px";
+        li.addEventListener("click", () => {
+          searchInput.value = user.name;
+          userList.style.display = "none";
+          showUserProfile(user);
+        });
+        userList.appendChild(li);
+      });
+
+      userList.style.display = "block";
+    });
+
+    // Hide userList if clicked outside the search area
+    document.addEventListener("click", (e) => {
+      if (!userList.contains(e.target) && e.target !== searchInput) {
+        userList.style.display = "none";
+      }
+    });
+
+    function showUserProfile(user) {
+      if (user.pic) {
+        profilePic.style.backgroundImage = `url(${user.pic})`;
+        profilePic.style.backgroundSize = "cover";
+        profilePic.style.color = "transparent";
+        profilePic.textContent = "";
+      } else {
+        profilePic.style.backgroundImage = "none";
+        profilePic.style.color = "white";
+        const initials = user.name.split(" ").map(n => n[0]).join("").toUpperCase();
+        profilePic.textContent = initials;
+      }
+
+      profileName.textContent = user.name;
+      profileDesc.textContent = user.info;
+      profile.style.display = "flex";
+      profile.style.alignItems = "center";
+    }
+  </script>
+
+
+    </div>
+    <div class="nav-user-icon online" onclick="settingsMenuToggle()">
+      <img src="profile-pic.jpg" alt="User Profile" />
+    </div>
+    <!-- Settings menu omitted here for brevity but you can keep your existing code -->
+  </nav>
+
+  <div class="container">
+    <!-- left-sidebar -->
+    <div class="left-sidebar">
+      <div class="imp-links">
+        <a href="#"><img src="home-1.jpg" alt="Home" />Home</a>
+        <a href="#"><img src="friends.jpg" alt="Friends" />Friends</a>
+        <a href="#"><img src="groups.jpg" alt="Groups" />Groups</a>
+        <a href="#"><img src="marketplace.jpg" alt="Marketplace" />Marketplace</a>
+        <a href="#"><img src="watch.jpg" alt="Watch" />Watch</a>
+        <a href="#">See More</a>
+      </div>
+      <div class="shortcut-links">
+        <p>Your shortcuts</p>
+        <a href="#"><img src="shortcut-1.jpg" alt="Web Developers" />Web Developers</a>
+        <a href="#"><img src="shortcut-2.jpg" alt="Front-End Developer" />front-End Developer</a>
+        <a href="#"><img src="shortcut-3.jpg" alt="Web Design Course" />Web Design course</a>
+        <a href="#"><img src="shortcut-4.jpg" alt="Full stack Development" />Full stack Development</a>
+      </div>
+    </div>
+
+    <!-- main-content -->
+    <div class="main-content">
+      <div class="story-gallery">
+        <div class="story story1">
+          <img src="upload.jpg" alt="Post Story" />
+          <p>post Story</p>
+        </div>
+        <div class="story story2">
+          <img src="member-2.jpg" alt="Browniiey baddie" />
+          <p>Browniiey baddie</p>
+        </div>
+        <div class="story story3">
+          <img src="member-6.jpg" alt="venessa" />
+          <p>venessa</p>
+        </div>
+        <div class="story story4">
+          <img src="member-3.jpg" alt="Trust" />
+          <p>Trust</p>
+        </div>
+        <div class="story story5">
+          <img src="member-1.jpg" alt="Destiny" />
+          <p>Destiny</p>
+        </div>
+        <div class="story story6">
+          <img src="redmoon.jpg" alt="Mrr Hectic" />
+          <p>Mrr Hectic</p>
+        </div>
+      </div>
+
+      <div class="write-post-contaier">
+        <div class="user-profile">
+          <img src="profile-pic.jpg" alt="User Profile" />
+          <div>
+            <p>Dêstîñëë Dèstîñëë</p>
+            <small>
+              <p style="color:gray;">Public</p>
+              <i class="fas fa-caret-down"></i>
+            </small>
+          </div>
+        </div>
+
+      <div class="post-container">
+  <div class="user-profile">
+    <img src="profile-pic.jpg" />
+    <div>
+      <p> Dêstîñëë Dèstîñëë</p>
+      <span> june 24 2025, 13:40</span>
+    </div>
+    <a href="#"><i class="fas fa-ellipsis"></i></a>
+  </div>
+  <textarea rows="3" placeholder="What's on your mind Dêstîñëë Dèstîñëë?"></textarea>
+  <div class="add-post-links">
+    <a href="#"><img src="video.jpg" />Live Video</a>
+    <a href="#"><img src="camera.jpg" />Photos/video</a>
+    <a href="#"><img src="feelings.jpg" />Feelings/activity</a>
+  </div>
+</div>
+
+<!-- and all other post-container divs, like these -->
+
+<div class="post-container">
+  <div class="user-profile">
+    <img src="profile-pic.jpg" />
+    <div>
+      <p> Dêstîñëë Dèstîñëë</p>
+      <span> Just Now</span>
+    </div>
+    <a href="#"><i class="fas fa-ellipsis"></i></a>
+  </div>
+  <p class="post-text">watch YouTube Tutorials to learn Full stack Development @YouTube Channel to watch more videos for Web Design, web Development course, etc. <a href="#"> #courseEra</a> <a href="#"> #YouTubeChannel</a></p>
+  <img src="coursera.jpg" class="post-img" />
+  <div class="contaier-post">
+    <div class="add-post-links">
+      <a href="#"><img src="like.jpg" /></a>
+      <a href="#"><img src="comment.jpg" /></a>
+      <a href="#"><img src="share.jpg" /></a>
+    </div>
+    <div class="post-profile-icon">
+      <img src="profile-pic.jpg" style="width: 40px; height: 40px; border-radius: 50%;" alt="Browniiey" />
+      <i class="fas fa-caret-down"></i>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <button
+      type="button"
+      style="
+        display: block;
+        margin: auto;
+        cursor: pointer;
+        padding: 5px 10px;
+        border: 1px solid #0c1c47;
+        color: #fff;
+        background: #0c1c47;
+        border-radius: 4px;
+      "
+    >
+      Load More
+    </button>
+  </div>
+
+  <!-- right-sidebar -->
+  <div class="right-sidebar">
+    <div class="sidebar-title">
+      <h4>Events</h4>
+      <a href="#">See All</a>
+    </div>
+
+    <div class="event">
+      <div class="left-event">
+        <h2>18</h2>
+        <span>March</span>
+      </div>
+      <div class="right-event">
+        <h4>Dance Party</h4>
+        <p>Pretoria Garderns</p>
+        <a href="#">More info</a>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="left-event">
+        <h2>22</h2>
+        <span>June</span>
+      </div>
+      <div class="right-event">
+        <h4>Web Design Bootcamp (WDB)</h4>
+        <p>Pretoria Garderns</p>
+        <a href="#">More info</a>
+      </div>
+    </div>
+
+    <div class="sidebar-title">
+      <h4>Advertisement</h4>
+      <a href="#">Close</a>
+    </div>
+    <img src="Advertisment.jpg" class="sidebar-ads" alt="Advertisement" />
+
+    <div class="sidebar-title">
+      <h4>Conversation</h4>
+      <a href="#">Hide Chat</a>
+    </div>
+
+    <div class="online-list">
+      <div style="position: relative; display: inline-block;" class="online">
+        <img src="member-2.jpg" style="width: 40px; height: 40px; border-radius: 50%;" alt="Browniiey" />
+        <span
+          style="
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            background-color: #33cc33;
+            border-radius: 50%;
+            border: 2px solid #fff;
+          "
+        ></span>
+      </div>
+      <p>Browniiey baddie</p>
+    </div>
+    <!-- Add other online-list divs similarly -->
+
+  </div>
+
+  <!-- Your main search and profile script -->
+  <script>
+    // A dummy function to avoid errors on click
+    function settingsMenuToggle() {
+      alert("Settings menu toggled!");
+    }
+
+    // User data with name and description
+    const users = [
+      { name: "John Doe", desc: "Software Engineer from NY" },
+      { name: "Jane Smith", desc: "Graphic Designer in LA" },
+      { name: "Michael Johnson", desc: "Marketing Specialist" },
+      { name: "Emily Davis", desc: "Content Writer" },
+      { name: "Chris Brown", desc: "Product Manager" },
+      { name: "Anna Wilson", desc: "UX/UI Designer" },
+      { name: "David Martinez", desc: "Freelance Developer" },
+      { name: "Sophia Lee", desc: "Photographer" },
+      { name: "James Taylor", desc: "Entrepreneur" },
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const userList = document.getElementById("userList");
+    const profile = document.getElementById("profile");
+    const profilePic = document.getElementById("profilePic");
+    const profileName = document.getElementById("profileName");
+    const profileDesc = document.getElementById("profileDesc");
+
+    function displayUsers(filteredUsers) {
+      userList.innerHTML = "";
+
+      if (filteredUsers.length === 0) {
+        userList.innerHTML = "<li>No users found</li>";
+      } else {
+        filteredUsers.forEach((user) => {
+          const li = document.createElement("li");
+          li.textContent = user.name;
+          li.style.cursor = "pointer";
+          li.addEventListener("click", () => {
+            showProfile(user);
+            userList.style.display = "none";
+            searchInput.value = user.name; // Set input to clicked user name
+          });
+          userList.appendChild(li);
+        });
+      }
+
+      userList.style.display =
+        filteredUsers.length > 0 && searchInput.value.trim() !== ""
+          ? "block"
+          : "none";
+    }
+
+    function showProfile(user) {
+      // Generate initials for profile pic
+      const initials = user.name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase();
+      profilePic.textContent = initials;
+
+      // Optional: random background color based on name (for some variation)
+      profilePic.style.backgroundColor = stringToColor(user.name);
+
+      profileName.textContent = user.name;
+      profileDesc.textContent = user.desc;
+      profile.style.display = "flex";
+    }
+
+    function stringToColor(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      let color = "#";
+      for (let i = 0; i < 3; i++) {
+        const value = (hash >> (i * 8)) & 0xff;
+        color += ("00" + value.toString(16)).slice(-2);
+      }
+      return color;
+    }
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase().trim();
+      if (query === "") {
+        userList.style.display = "none";
+        profile.style.display = "none";
+        return;
+      }
+      const filteredUsers = users.filter((user) =>
+        user.name.toLowerCase().includes(query)
+      );
+      displayUsers(filteredUsers);
+      profile.style.display = "none";
+    });
+  </script>
+
+  <script src="scripto.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Posts - SocialNet</title>
+    <link rel="stylesheet" href="memories.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+               <h1 style="font-family:'Segoe Script', cursive; font-size:30px; color:#A4B569;">SocialNet</h1>
+            </div>
+            
+            <div class="search-bar">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="#65676b">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+                <input type="text" placeholder="Search">
+            </div>
+            
+            <div class="nav-icons">
+                <a href="saved.html" class="active">Saved</a>
+                <a href="dashboard.html">Home</a>
+                <a href="friends.html">Friends</a>
+                <a href="groups.html">Groups</a>
+            </div>
+            
+            <div class="user-profile">
+                <button class="dark-mode-toggle" id="darkModeToggle">☀️</button>
+                <div class="avatar">D</div>
+                <span>êstîñëë Dèstîñëë</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Saved Items</h2>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" data-category="all">All Saved</a></li>
+                <li><a href="#" data-category="videos">Videos</a></li>
+                <li><a href="#" data-category="photos">Photos</a></li>
+                <li><a href="#" data-category="links">Links</a></li>
+                <li><a href="#" data-category="marketplace">Marketplace</a></li>
+                <li><a href="#" data-category="groups">Groups</a></li>
+                <li><a href="#" data-category="pages">Pages</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="page-header">
+                <h1 id="page-title">Saved Posts</h1>
+                <p id="page-description">Posts you've saved for later</p>
+            </div>
+            
+            <div class="saved-posts" id="saved-posts-container">
+                <!-- Content will be dynamically loaded here based on category -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="memories.js"></script>
+</body>
+</html>

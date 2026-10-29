@@ -1,0 +1,157 @@
+:root {
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+    --text-color: #1c1e21;
+    --border-color: #dddfe2;
+    --primary-color: #1877f2;
+    --secondary-text: #65676b;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+    --bg-color: #18191a;
+    --card-bg: #242526;
+    --text-color: #e4e6eb;
+    --border-color: #3e4042;
+    --primary-color: #2d88ff;
+    --secondary-text: #b0b3b8;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--text-color);
+    transition: transform 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+.birthday-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.birthday-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.birthday-item:last-child {
+    border-bottom: none;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    color: white;
+    font-weight: bold;
+}
+
+.birthday-info {
+    flex: 1;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.birthday-date {
+    font-size: 13px;
+    color: var(--secondary-text);
+}
+
+.upcoming .birthday-date {
+    color: var(--primary-color);
+}
+
+.past .birthday-date {
+    color: var(--secondary-text);
+}
+
+.action-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.action-button:hover {
+    background-color: #166fe5;
+}
+
+.past .action-button {
+    background-color: var(--secondary-text);
+}
+
+.past .action-button:hover {
+    background-color: #8a8d91;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 20px;
+    color: var(--secondary-text);
+    font-style: italic;
+}
